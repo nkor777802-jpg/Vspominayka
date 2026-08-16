@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вспоминайка</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="top-controls">
+      <button
+        class="sound-toggle"
+        type="button"
+        id="sound-toggle"
+        aria-pressed="false"
+        aria-label="Включить звук"
+      >
+        🔇 Звук
+      </button>
+      <div class="a11y">
+      <button
+        class="a11y-toggle"
+        type="button"
+        id="a11y-toggle"
+        aria-expanded="false"
+        aria-controls="a11y-menu"
+        aria-label="Размер текста и контраст"
+      >
+        Аа
+      </button>
+      <div class="a11y-menu" id="a11y-menu" hidden>
+        <p class="a11y-label">Размер текста</p>
+        <button type="button" data-text-size="normal">Обычный текст</button>
+        <button type="button" data-text-size="large">Крупный текст</button>
+        <button type="button" data-text-size="xlarge">Очень крупный текст</button>
+        <p class="a11y-label">Контраст</p>
+        <button type="button" id="contrast-toggle" aria-pressed="false">Повышенный контраст</button>
+      </div>
+      </div>
+    </div>
+
+    <div class="page" id="screen-home">
+      <header class="hero">
+        <div class="hero-copy">
+          <h1>Вспоминайка</h1>
+          <p class="hero-subtitle">
+            Добрые игры для памяти, внимания и хорошего настроения
+          </p>
+          <p class="hero-note">Можно играть спокойно, без спешки и оценок.</p>
+        </div>
+
+        <div class="hero-media">
+          <img
+            class="hero-photo"
+            src="assets/images/relax.png"
+            alt="Летняя веранда с чаем, цветами и семейным фотоальбомом"
+          />
+          <button
+            class="garden-sound-btn"
+            type="button"
+            id="garden-sound"
+            aria-pressed="false"
+            aria-label="Включить звуки сада"
+          >
+            ♫ Звуки сада
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="cards" aria-label="Разделы">
+          <button class="card card-play" type="button" id="open-memory">
+            <span class="card-mark" aria-hidden="true"></span>
+            <h2>Память</h2>
+            <p>Запоминайте предметы, слова и небольшие истории</p>
+            <span class="card-action">Что исчезло?</span>
+          </button>
+
+          <button class="card card-play" type="button" id="open-odd">
+            <span class="card-mark card-mark-attention" aria-hidden="true"></span>
+            <h2>Внимание</h2>
+            <p>Замечайте детали и находите изменения</p>
+            <span class="card-action">Найди лишнее</span>
+          </button>
+
+          <button class="card card-play" type="button" id="open-gastro">
+            <span class="card-mark card-mark-count" aria-hidden="true"></span>
+            <h2>Счёт</h2>
+            <p>Простые задачи из повседневной жизни</p>
+            <span class="card-action">В гастрономе</span>
+          </button>
+
+          <button class="card card-play" type="button" id="open-memories">
+            <span class="card-mark card-mark-memories" aria-hidden="true"></span>
+            <h2>Воспоминания</h2>
+            <p>Пословицы, знакомые вещи, фильмы и добрые истории</p>
+            <span class="card-action">Собери пословицу</span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-game" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="back-home">
+          ← На главную
+        </button>
+        <p class="game-stage" id="game-stage">Начинаем</p>
+        <p class="progress" id="daily-progress">Сегодня собрано: 0</p>
+        <button class="hint-btn" type="button" id="hint-btn">
+          💡 Подсказка
+        </button>
+      </header>
+
+      <main class="game">
+        <h1>Соберите пословицу</h1>
+        <p class="game-instruction">Нажимайте на части пословицы по порядку</p>
+        <p class="game-feedback" id="game-feedback" aria-live="polite"></p>
+
+        <div class="answer-row" id="answer-row" aria-label="Собранная пословица">
+          <span class="answer-placeholder" id="answer-placeholder">
+            Здесь появится ваша пословица…
+          </span>
+        </div>
+
+        <div class="pieces" id="pieces" aria-label="Части пословицы"></div>
+
+        <div class="success" id="success-block" hidden>
+          <div class="success-petals" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="success-title">Прекрасно! 🌷</p>
+          <p class="success-quote" id="success-quote"></p>
+          <p class="success-count" id="success-count">Сегодня собрано: 0</p>
+          <button class="next-btn" type="button" id="next-proverb">
+            Следующая пословица →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-memory" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="memory-back">
+          ← На главную
+        </button>
+        <p class="game-stage" id="memory-stage">Начинаем</p>
+        <p class="progress" id="memory-progress">Сегодня сыграно: 0</p>
+        <button class="hint-btn" type="button" id="memory-longer">
+          Показывать дольше
+        </button>
+      </header>
+
+      <main class="game memory-game">
+        <h1>Что исчезло?</h1>
+        <p class="game-instruction" id="memory-subtitle">Запомните предметы</p>
+        <p class="game-feedback" id="memory-feedback" aria-live="polite"></p>
+
+        <div class="memory-wait" id="memory-wait" hidden>
+          <p>Запоминаем…</p>
+          <div class="memory-bar" aria-hidden="true">
+            <span class="memory-bar-fill" id="memory-bar-fill"></span>
+          </div>
+        </div>
+
+        <div class="memory-grid" id="memory-grid" aria-label="Предметы"></div>
+
+        <div class="memory-question" id="memory-question" hidden>
+          <p class="memory-ask">Какого предмета не хватает?</p>
+          <div class="memory-choices" id="memory-choices"></div>
+        </div>
+
+        <div class="success" id="memory-success" hidden>
+          <p class="success-title">Верно 🌷</p>
+          <button class="next-btn" type="button" id="memory-next">
+            Следующий раунд →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-odd" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="odd-back">
+          ← На главную
+        </button>
+        <p class="game-stage" id="odd-stage">Начинаем</p>
+        <p class="progress" id="odd-progress">Сегодня найдено: 0</p>
+        <button class="hint-btn" type="button" id="odd-hint">
+          💡 Подсказка
+        </button>
+      </header>
+
+      <main class="game odd-game">
+        <h1>Найди лишнее</h1>
+        <p class="game-instruction">Какой предмет здесь не подходит?</p>
+        <p class="game-feedback" id="odd-feedback" aria-live="polite"></p>
+
+        <div class="odd-grid" id="odd-grid" aria-label="Предметы"></div>
+
+        <div class="success" id="odd-success" hidden>
+          <div class="success-petals" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="success-title">Верно 🌷</p>
+          <p class="success-quote" id="odd-explain"></p>
+          <button class="next-btn" type="button" id="odd-next">
+            Следующее задание →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-gastro" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="gastro-back">
+          ← На главную
+        </button>
+        <p class="game-stage" id="gastro-stage">Начинаем</p>
+        <p class="progress" id="gastro-progress">Сегодня покупок: 0</p>
+        <button class="hint-btn" type="button" id="gastro-hint">
+          💡 Подсказка
+        </button>
+      </header>
+
+      <main class="game gastro-game">
+        <div class="gastro-banner">
+          <img
+            src="assets/images/gastronom-bg.png"
+            alt="Прилавок гастронома с продуктами и весами"
+          />
+        </div>
+        <h1>В гастрономе</h1>
+        <p class="game-instruction">Небольшая покупка из прошлого</p>
+        <p class="gastro-note">Игра в духе советского гастронома</p>
+        <p class="game-feedback" id="gastro-feedback" aria-live="polite"></p>
+
+        <div class="gastro-given" id="gastro-given"></div>
+        <div class="gastro-products" id="gastro-products"></div>
+        <p class="memory-ask" id="gastro-question"></p>
+        <div class="gastro-choices" id="gastro-choices"></div>
+
+        <div class="success gastro-success" id="gastro-success" hidden>
+          <div class="success-petals" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="success-title">Верно 🌷</p>
+          <p class="gastro-calc" id="gastro-calc"></p>
+          <p class="gastro-remember" id="gastro-remember" hidden></p>
+          <button class="next-btn" type="button" id="gastro-next">
+            Следующая покупка →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
