@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Вспоминайка</title>
+    <title>А помнишь…</title>
+    <meta name="description" content="А помнишь… — то, что делает нас нами. Игры для памяти, воспоминания, рецепты, заметки и важные записи." />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -42,11 +43,11 @@
     <div class="page" id="screen-home">
       <header class="hero">
         <div class="hero-copy">
-          <h1>Вспоминайка</h1>
+          <h1>А помнишь…</h1>
           <p class="hero-subtitle">
-            Добрые игры для памяти, внимания и хорошего настроения
+            То, что делает нас нами.
           </p>
-          <p class="hero-note">Можно играть спокойно, без спешки и оценок.</p>
+          <p class="hero-note">Игры для памяти, воспоминания, рецепты, заметки и важные записи — всё в одном спокойном и понятном месте.</p>
         </div>
 
         <div class="hero-media">
@@ -68,34 +69,66 @@
       </header>
 
       <main>
-        <section class="cards" aria-label="Разделы">
-          <button class="card card-play" type="button" id="open-memory">
-            <span class="card-mark" aria-hidden="true"></span>
-            <h2>Память</h2>
-            <p>Запоминайте предметы, слова и небольшие истории</p>
-            <span class="card-action">Что исчезло?</span>
+        <section class="cards cards-home" aria-label="Основные разделы">
+          <button class="card card-play card-featured card-memories" type="button" id="open-memories">
+            <span class="card-photo">
+              <img
+                src="assets/images/memories.png"
+                alt="Фотоальбом, камера и семейные фотографии на столе"
+              />
+            </span>
+            <h2>Игры и воспоминания</h2>
+            <p>Игры, знакомые вещи, пословицы и тёплые воспоминания</p>
+            <span class="card-action">Вспомнить →</span>
           </button>
 
-          <button class="card card-play" type="button" id="open-odd">
-            <span class="card-mark card-mark-attention" aria-hidden="true"></span>
-            <h2>Внимание</h2>
-            <p>Замечайте детали и находите изменения</p>
-            <span class="card-action">Найди лишнее</span>
+          <button class="card card-play card-featured card-life" type="button" id="open-my-important">
+            <span class="card-photo">
+              <img
+                src="assets/images/my_important.jpg"
+                alt="Тёплый домашний стол с записями, книгой и чаем"
+              />
+            </span>
+            <h2>Моё важное</h2>
+            <p>Рецепты, заметки, напоминания, телефоны и измерения</p>
+            <span class="card-action">Открыть →</span>
           </button>
 
-          <button class="card card-play" type="button" id="open-gastro">
-            <span class="card-mark card-mark-count" aria-hidden="true"></span>
-            <h2>Счёт</h2>
-            <p>Простые задачи из повседневной жизни</p>
-            <span class="card-action">В гастрономе</span>
-          </button>
+          <div class="home-cozy-row">
+            <article
+              class="card card-play card-featured card-tips-home"
+              id="open-tips"
+              tabindex="0"
+              role="link"
+              aria-label="Полезные хитрости"
+            >
+              <span class="card-photo">
+                <img
+                  src="assets/images/useful-tips.png"
+                  alt="Домашние предметы и надпись Полезные хитрости"
+                />
+              </span>
+              <h2>Полезные хитрости</h2>
+              <p>Простые советы для дома и каждый день</p>
+              <div class="tips-home-today">
+                <p class="tips-home-today-label">Сегодня пригодится</p>
+                <p class="tips-home-today-text" id="tips-home-today-title">совет дня</p>
+              </div>
+              <div class="tips-home-actions">
+                <span class="card-action tips-home-open">Посмотреть советы →</span>
+                <button class="hint-btn tips-home-notebook" type="button" id="open-tips-notebook">
+                  📒 Моя тетрадка
+                </button>
+              </div>
+            </article>
 
-          <button class="card card-play" type="button" id="open-memories">
-            <span class="card-mark card-mark-memories" aria-hidden="true"></span>
-            <h2>Воспоминания</h2>
-            <p>Пословицы, знакомые вещи, фильмы и добрые истории</p>
-            <span class="card-action">Собери пословицу</span>
-          </button>
+            <button class="home-room-door" type="button" id="open-room" aria-label="Моя комната. Заглянуть в комнату">
+              <img
+                src="assets/images/room/room-door.png"
+                alt="Деревянная дверь с табличкой Моя комната"
+              />
+            </button>
+          </div>
         </section>
       </main>
     </div>
@@ -103,42 +136,89 @@
     <div class="page game-page" id="screen-game" hidden>
       <header class="game-top">
         <button class="back-btn" type="button" id="back-home">
-          ← На главную
+          ← Назад
         </button>
-        <p class="game-stage" id="game-stage">Начинаем</p>
-        <p class="progress" id="daily-progress">Сегодня собрано: 0</p>
-        <button class="hint-btn" type="button" id="hint-btn">
-          💡 Подсказка
-        </button>
+        <p class="game-stage" id="proverb-stage" hidden>Пословица 1 из 10</p>
+        <p class="progress" id="proverb-progress" hidden>0</p>
       </header>
 
-      <main class="game">
-        <h1>Соберите пословицу</h1>
-        <p class="game-instruction">Нажимайте на части пословицы по порядку</p>
-        <p class="game-feedback" id="game-feedback" aria-live="polite"></p>
-
-        <div class="answer-row" id="answer-row" aria-label="Собранная пословица">
-          <span class="answer-placeholder" id="answer-placeholder">
-            Здесь появится ваша пословица…
-          </span>
+      <main class="game proverb-game">
+        <div id="proverb-hub">
+          <h1>Народная мудрость</h1>
+          <p class="game-instruction">Пословицы, которые мы помним с детства</p>
+          <p class="game-feedback" id="proverb-hub-note" hidden></p>
+          <section class="cards memories-cards" aria-label="Режимы пословиц">
+            <button class="card card-play" type="button" id="proverb-mode-continue">
+              <span class="card-mark card-mark-memories" aria-hidden="true"></span>
+              <h2>Продолжи пословицу</h2>
+              <p>Вспомните знакомое окончание</p>
+              <span class="card-action">Начать</span>
+            </button>
+            <button class="card card-play" type="button" id="proverb-mode-pair">
+              <span class="card-mark card-mark-attention" aria-hidden="true"></span>
+              <h2>Найди пару</h2>
+              <p>Соедините начало и окончание</p>
+              <span class="card-action">Начать</span>
+            </button>
+            <button class="card card-play" type="button" id="proverb-mode-build">
+              <span class="card-mark" aria-hidden="true"></span>
+              <h2>Собери пословицу</h2>
+              <p>Сложите части в нужном порядке</p>
+              <span class="card-action">Начать</span>
+            </button>
+          </section>
         </div>
 
-        <div class="pieces" id="pieces" aria-label="Части пословицы"></div>
-
-        <div class="success" id="success-block" hidden>
-          <div class="success-petals" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div id="proverb-continue" hidden>
+          <h1>Продолжите пословицу</h1>
+          <p class="proverb-lead" id="continue-lead"></p>
+          <p class="game-feedback" id="continue-feedback" aria-live="polite"></p>
+          <div class="proverb-choices" id="continue-choices"></div>
+          <div class="success" id="continue-reveal" hidden>
+            <p class="success-title" id="continue-reveal-title"></p>
+            <p class="success-quote" id="continue-reveal-text"></p>
+            <button class="next-btn" type="button" id="continue-next">Следующая →</button>
           </div>
-          <p class="success-title">Прекрасно! 🌷</p>
-          <p class="success-quote" id="success-quote"></p>
-          <p class="success-count" id="success-count">Сегодня собрано: 0</p>
-          <button class="next-btn" type="button" id="next-proverb">
-            Следующая пословица →
-          </button>
+        </div>
+
+        <div id="proverb-pair" hidden>
+          <h1>Найди пару</h1>
+          <p class="game-instruction">Сначала начало, затем окончание</p>
+          <p class="game-feedback" id="pair-feedback" aria-live="polite"></p>
+          <p class="pair-picked" id="pair-picked" hidden></p>
+          <div class="pair-board" id="pair-board">
+            <div class="pair-col" id="pair-left" aria-label="Начала пословиц"></div>
+            <div class="pair-col" id="pair-right" aria-label="Окончания пословиц"></div>
+          </div>
+          <div class="success" id="pair-success" hidden>
+            <p class="success-title">Все пословицы собраны! ❤️</p>
+            <button class="next-btn" type="button" id="pair-again">Ещё раунд</button>
+          </div>
+        </div>
+
+        <div id="proverb-build" hidden>
+          <h1>Собери пословицу</h1>
+          <p class="game-instruction">Нажимайте части в нужном порядке</p>
+          <p class="game-feedback" id="build-feedback" aria-live="polite"></p>
+          <div class="answer-row" id="build-answer" aria-label="Собранная пословица">
+            <span class="answer-placeholder" id="build-placeholder">Здесь появится пословица…</span>
+          </div>
+          <div class="pieces" id="build-pieces" aria-label="Части пословицы"></div>
+          <button class="hint-btn" type="button" id="build-undo">Отменить последний выбор</button>
+          <div class="success" id="build-success" hidden>
+            <p class="success-title">Получилось! ❤️</p>
+            <p class="success-quote" id="build-quote"></p>
+            <button class="next-btn" type="button" id="build-next">Следующая →</button>
+          </div>
+        </div>
+
+        <div id="proverb-result" hidden>
+          <h1 id="proverb-result-title">Отличная память!</h1>
+          <p class="success-quote" id="proverb-result-text"></p>
+          <div class="proverb-result-actions">
+            <button class="next-btn" type="button" id="proverb-again">Сыграть ещё</button>
+            <button class="hint-btn" type="button" id="proverb-other">Выбрать другую игру</button>
+          </div>
         </div>
       </main>
     </div>
@@ -146,7 +226,7 @@
     <div class="page game-page" id="screen-memory" hidden>
       <header class="game-top">
         <button class="back-btn" type="button" id="memory-back">
-          ← На главную
+          ← Назад
         </button>
         <p class="game-stage" id="memory-stage">Начинаем</p>
         <p class="progress" id="memory-progress">Сегодня сыграно: 0</p>
@@ -186,7 +266,7 @@
     <div class="page game-page" id="screen-odd" hidden>
       <header class="game-top">
         <button class="back-btn" type="button" id="odd-back">
-          ← На главную
+          ← Назад
         </button>
         <p class="game-stage" id="odd-stage">Начинаем</p>
         <p class="progress" id="odd-progress">Сегодня найдено: 0</p>
@@ -222,9 +302,8 @@
     <div class="page game-page" id="screen-gastro" hidden>
       <header class="game-top">
         <button class="back-btn" type="button" id="gastro-back">
-          ← На главную
+          ← Назад
         </button>
-        <p class="game-stage" id="gastro-stage">Начинаем</p>
         <p class="progress" id="gastro-progress">Сегодня покупок: 0</p>
         <button class="hint-btn" type="button" id="gastro-hint">
           💡 Подсказка
@@ -266,6 +345,1333 @@
       </main>
     </div>
 
+    <div class="page game-page" id="screen-puzzle" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="puzzle-back">
+          ← Назад
+        </button>
+        <p class="progress" id="puzzle-moves" hidden>Ходов: 0</p>
+        <button class="hint-btn" type="button" id="puzzle-peek" hidden aria-label="Показать исходную картинку">
+          👁 Показать картинку
+        </button>
+        <button class="hint-btn" type="button" id="puzzle-other" aria-label="Выбрать другую картинку">
+          Другая картинка
+        </button>
+      </header>
+
+      <main class="game puzzle-game">
+        <h1>Пятнашки</h1>
+        <p class="game-instruction puzzle-howto" id="puzzle-howto">
+          <span class="puzzle-howto-text">
+            <strong>Как играть:</strong> нажмите на плитку рядом с пустым местом — она сдвинется. Соберите целую фотографию.
+          </span>
+          <button
+            type="button"
+            class="puzzle-howto-btn"
+            id="puzzle-howto-btn"
+            hidden
+            aria-label="Показать, как играть"
+          >
+            ? Как играть
+          </button>
+        </p>
+        <p class="game-feedback" id="puzzle-error" hidden>Не удалось загрузить картинки для игры.</p>
+
+        <div class="puzzle-difficulty" id="puzzle-difficulty" role="group" aria-label="Выберите сложность">
+          <p class="puzzle-difficulty-label">Выберите сложность</p>
+          <div class="puzzle-difficulty-row">
+            <button class="hint-btn puzzle-diff-btn is-on" type="button" data-size="3" aria-pressed="true">
+              Легко
+              <span>3 × 3</span>
+            </button>
+            <button class="hint-btn puzzle-diff-btn" type="button" data-size="4" aria-pressed="false">
+              Обычно
+              <span>4 × 4</span>
+            </button>
+            <button class="hint-btn puzzle-diff-btn" type="button" data-size="5" aria-pressed="false">
+              Сложнее
+              <span>5 × 5</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="puzzle-stage" id="puzzle-stage" hidden>
+          <div class="puzzle-preview" id="puzzle-preview" hidden>
+            <p class="memory-ask">Запомните картинку</p>
+            <div class="puzzle-frame">
+              <img id="puzzle-preview-img" alt="Целая фотография для запоминания" />
+            </div>
+            <button class="next-btn" type="button" id="puzzle-start-now">Начать сейчас</button>
+          </div>
+
+          <div class="puzzle-board" id="puzzle-board" hidden role="grid" tabindex="0" aria-label="Пятнашки. Нажимайте плитку рядом с пустым местом"></div>
+
+          <div class="success puzzle-success" id="puzzle-success" hidden>
+            <p class="success-title">Получилось! ❤️</p>
+            <p class="success-quote" id="puzzle-win-moves"></p>
+            <p class="puzzle-caption" id="puzzle-win-caption" hidden></p>
+            <div class="puzzle-win-actions">
+              <button class="next-btn" type="button" id="puzzle-again">Собрать ещё</button>
+              <button class="hint-btn" type="button" id="puzzle-win-other">Другая картинка</button>
+              <button class="hint-btn" type="button" id="puzzle-win-back">← Назад</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="puzzle-modal" id="puzzle-modal" hidden>
+        <div class="puzzle-modal-card" role="dialog" aria-modal="true" aria-labelledby="puzzle-modal-title">
+          <p class="memory-ask" id="puzzle-modal-title">Исходная картинка</p>
+          <img id="puzzle-modal-img" alt="Исходная фотография" />
+          <button class="next-btn" type="button" id="puzzle-modal-continue">Продолжить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page game-page" id="screen-assemble" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="assemble-back">
+          ← Назад
+        </button>
+        <p class="progress" id="assemble-moves" hidden>Перестановок: 0</p>
+        <button class="hint-btn" type="button" id="assemble-peek" hidden aria-label="Показать исходную картинку">
+          👁 Показать картинку
+        </button>
+        <button class="hint-btn" type="button" id="assemble-other" aria-label="Выбрать другую картинку">
+          Другая картинка
+        </button>
+      </header>
+
+      <main class="game puzzle-game assemble-game">
+        <h1>Собери картинку</h1>
+        <p class="game-instruction puzzle-howto" id="assemble-howto">
+          <span class="puzzle-howto-text">
+            <strong>Как играть:</strong> перетащите любой фрагмент на нужное место. Пустой клетки нет — все кусочки уже на столе.
+          </span>
+          <button
+            type="button"
+            class="puzzle-howto-btn"
+            id="assemble-howto-btn"
+            hidden
+            aria-label="Показать, как играть"
+          >
+            ? Как играть
+          </button>
+        </p>
+        <p class="game-feedback" id="assemble-error" hidden>Не удалось загрузить картинки для игры.</p>
+
+        <div class="puzzle-difficulty assemble-difficulty" id="assemble-difficulty" role="group" aria-label="Выберите сложность">
+          <p class="puzzle-difficulty-label">Выберите сложность</p>
+          <div class="puzzle-difficulty-row assemble-difficulty-row">
+            <button class="hint-btn puzzle-diff-btn assemble-diff-btn is-on" type="button" data-count="6" aria-pressed="true">
+              Легко
+              <span>6 фрагментов</span>
+            </button>
+            <button class="hint-btn puzzle-diff-btn assemble-diff-btn" type="button" data-count="9" aria-pressed="false">
+              Обычно
+              <span>9 фрагментов</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="puzzle-stage" id="assemble-stage" hidden>
+          <div class="puzzle-preview" id="assemble-preview" hidden>
+            <p class="memory-ask">Запомните картинку</p>
+            <div class="puzzle-frame">
+              <img id="assemble-preview-img" alt="Целая фотография для запоминания" />
+            </div>
+            <button class="next-btn" type="button" id="assemble-start-now">Начать сейчас</button>
+          </div>
+
+          <div class="assemble-board" id="assemble-board" hidden role="list" aria-label="Соберите картинку. Перетащите фрагмент на нужное место"></div>
+
+          <div class="success puzzle-success" id="assemble-success" hidden>
+            <p class="success-title">Получилось! ❤️</p>
+            <p class="success-quote" id="assemble-win-moves"></p>
+            <p class="puzzle-caption" id="assemble-win-caption" hidden></p>
+            <div class="puzzle-win-actions">
+              <button class="next-btn" type="button" id="assemble-again">Собрать ещё</button>
+              <button class="hint-btn" type="button" id="assemble-win-other">Другая картинка</button>
+              <button class="hint-btn" type="button" id="assemble-win-back">← Назад</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="puzzle-modal" id="assemble-modal" hidden>
+        <div class="puzzle-modal-card" role="dialog" aria-modal="true" aria-labelledby="assemble-modal-title">
+          <p class="memory-ask" id="assemble-modal-title">Исходная картинка</p>
+          <img id="assemble-modal-img" alt="Исходная фотография" />
+          <button class="next-btn" type="button" id="assemble-modal-continue">Продолжить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page game-page" id="screen-memories" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="memories-back">
+          ← На главную
+        </button>
+      </header>
+      <main class="game memories-hub">
+        <h1>Игры и воспоминания</h1>
+        <p class="game-instruction">Поиграем, вспомним знакомое и хорошее</p>
+        <section class="cards memories-cards" aria-label="Игры и воспоминания">
+          <button class="card card-play card-featured" type="button" id="open-remember-hub">
+            <span class="card-photo card-photo-remember">
+              <img
+                src="assets/images/memory-games/remember-this.jpg"
+                alt="Знакомые вещи, фотографии и часы на столе"
+              />
+            </span>
+            <h2>Помните это?</h2>
+            <p>Вещи, фразы, даты и знакомые истории</p>
+            <span class="card-action">Вспомнить</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-attention-hub">
+            <span class="card-photo card-photo-attention">
+              <img
+                src="assets/images/memory-games/attention.jpg"
+                alt="Предметы на столе для игры на внимание"
+              />
+            </span>
+            <h2>Проверьте внимание</h2>
+            <p>Что исчезло, что изменилось, что здесь лишнее</p>
+            <span class="card-action">Играть</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-proverb">
+            <span class="card-photo card-photo-wisdom">
+              <img
+                src="assets/images/memory-games/folk-wisdom.jpg"
+                alt="Старые книги и народная мудрость"
+              />
+            </span>
+            <h2>Народная мудрость</h2>
+            <p>Пословицы, которые мы помним с детства</p>
+            <span class="card-action">Открыть</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-photo-hub">
+            <span class="card-photo card-photo-photos">
+              <img
+                src="assets/images/memory-games/photo-games.jpg"
+                alt="Семейные фотографии и плёночный фотоаппарат"
+              />
+            </span>
+            <h2>Соберите воспоминание</h2>
+            <p>Соберите фотографию из фрагментов или сыграйте в пятнашки</p>
+            <span class="card-action">Играть</span>
+          </button>
+          <button class="card card-play card-featured card-gastro-entry" type="button" id="open-gastro">
+            <span class="card-photo">
+              <img
+                src="assets/images/gastronom-bg.png"
+                alt="Прилавок знакомого гастронома"
+              />
+            </span>
+            <h2>В гастрономе</h2>
+            <p>Простые задачи из повседневной жизни</p>
+            <span class="card-action">Играть</span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-remember-hub" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="remember-hub-back">← Назад</button>
+      </header>
+      <main class="game memories-hub">
+        <h1>Помните это?</h1>
+        <p class="game-instruction">Вещи, фразы, даты и знакомые истории</p>
+        <section class="cards memories-cards" aria-label="Помните это?">
+          <button class="card card-play card-featured" type="button" id="open-ussr">
+            <span class="card-photo card-photo-things">
+              <img
+                src="assets/images/memory-games/things-past.jpg"
+                alt="Предметы из прошлого"
+              />
+            </span>
+            <h2>Вещи из прошлого</h2>
+            <p>Знакомые предметы, которые многие помнят с детства</p>
+            <span class="card-action">Вспомнить</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-quotes">
+            <span class="card-photo card-photo-quotes">
+              <img
+                src="assets/images/memory-games/famous-quotes.jpg"
+                alt="Старое радио и знакомые фразы"
+              />
+            </span>
+            <h2>Знаменитые фразы</h2>
+            <p>Кто это сказал? Коротко и по делу</p>
+            <span class="card-action">Вспомнить</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-dates">
+            <span class="card-photo card-photo-dates">
+              <img
+                src="assets/images/memory-games/remember-date.jpg"
+                alt="Календарь и памятные даты"
+              />
+            </span>
+            <h2>Помните дату?</h2>
+            <p>События, которые остались в памяти</p>
+            <span class="card-action">Вспомнить</span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-attention-hub" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="attention-hub-back">← Назад</button>
+      </header>
+      <main class="game memories-hub">
+        <h1>Проверьте внимание</h1>
+        <p class="game-instruction">Что исчезло, что изменилось, что здесь лишнее</p>
+        <section class="cards memories-cards" aria-label="Игры на внимание">
+          <button class="card card-play" type="button" id="open-memory">
+            <span class="card-mark" aria-hidden="true"></span>
+            <h2>Что исчезло?</h2>
+            <p>Запомните предметы — и скажите, какого не хватает</p>
+            <span class="card-action">Играть</span>
+          </button>
+          <button class="card card-play" type="button" id="open-odd">
+            <span class="card-mark card-mark-attention" aria-hidden="true"></span>
+            <h2>Найди лишнее</h2>
+            <p>Какой предмет здесь не подходит?</p>
+            <span class="card-action">Играть</span>
+          </button>
+          <!-- Позже: «Что изменилось?» -->
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-photo-hub" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="photo-hub-back">← Назад</button>
+      </header>
+      <main class="game memories-hub">
+        <h1>Соберите воспоминание</h1>
+        <p class="game-instruction">Соберите фотографию из фрагментов или сыграйте в пятнашки</p>
+        <section class="cards memories-cards" aria-label="Игры с фотографиями">
+          <button class="card card-play card-featured" type="button" id="open-puzzle">
+            <span class="card-photo">
+              <img
+                src="assets/images/memory-games/assemble-picture.jpg"
+                alt="Фотография, собранная из фрагментов пазла"
+              />
+            </span>
+            <h2>Собери картинку</h2>
+            <p>Перетащите фрагменты на свои места и соберите фотографию</p>
+            <span class="card-action">Играть</span>
+          </button>
+          <button class="card card-play card-featured" type="button" id="open-pyatnashki">
+            <span class="card-photo">
+              <img
+                src="assets/images/memory-games/sliding-puzzle.jpg"
+                alt="Пятнашки с семейной фотографией"
+              />
+            </span>
+            <h2>Пятнашки</h2>
+            <p>Сдвиньте плитки и соберите целое изображение</p>
+            <span class="card-action">Играть</span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-quotes" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="quotes-back">← Назад</button>
+        <p class="game-stage" id="quotes-stage">Фраза 1 из 10</p>
+        <p class="progress" id="quotes-progress">Вспомнили: 0</p>
+      </header>
+      <main class="game ussr-game">
+        <div id="quotes-play">
+          <h1>Знаменитые фразы</h1>
+          <p class="game-instruction" id="quotes-instruction">Выберите ответ</p>
+          <p class="recall-prompt" id="quotes-prompt"></p>
+          <p class="game-feedback" id="quotes-feedback" aria-live="polite"></p>
+          <div class="ussr-choices" id="quotes-choices"></div>
+          <div class="success" id="quotes-story" hidden>
+            <p class="ussr-story-label">А помните?</p>
+            <p class="success-quote" id="quotes-memory"></p>
+            <button class="next-btn" type="button" id="quotes-next">Следующая фраза →</button>
+          </div>
+        </div>
+        <div id="quotes-result" hidden>
+          <h1>Вот сколько фраз вспомнилось!</h1>
+          <p class="success-quote" id="quotes-result-text"></p>
+          <div class="ussr-result-actions">
+            <button class="next-btn" type="button" id="quotes-again">Сыграть ещё</button>
+            <button class="hint-btn" type="button" id="quotes-home">Назад</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-dates" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="dates-back">← Назад</button>
+        <p class="game-stage" id="dates-stage">Дата 1 из 10</p>
+        <p class="progress" id="dates-progress">Вспомнили: 0</p>
+      </header>
+      <main class="game ussr-game">
+        <div id="dates-play">
+          <h1>Помните дату?</h1>
+          <p class="game-instruction" id="dates-instruction">Выберите ответ</p>
+          <p class="recall-prompt" id="dates-prompt"></p>
+          <p class="game-feedback" id="dates-feedback" aria-live="polite"></p>
+          <div class="ussr-choices" id="dates-choices"></div>
+          <div class="success" id="dates-story" hidden>
+            <p class="ussr-story-label">А помните?</p>
+            <p class="success-quote" id="dates-memory"></p>
+            <button class="next-btn" type="button" id="dates-next">Следующая дата →</button>
+          </div>
+        </div>
+        <div id="dates-result" hidden>
+          <h1>Вот сколько дат вспомнилось!</h1>
+          <p class="success-quote" id="dates-result-text"></p>
+          <div class="ussr-result-actions">
+            <button class="next-btn" type="button" id="dates-again">Сыграть ещё</button>
+            <button class="hint-btn" type="button" id="dates-home">Назад</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-ussr" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="ussr-back">
+          ← Назад
+        </button>
+        <p class="game-stage" id="ussr-stage">Вещь 1 из 10</p>
+        <p class="progress" id="ussr-progress">Угадано: 0</p>
+      </header>
+      <main class="game ussr-game">
+        <div id="ussr-play">
+          <h1>Помните эту вещь?</h1>
+          <p class="game-feedback" id="ussr-note" hidden></p>
+          <div class="ussr-frame">
+            <img id="ussr-img" alt="Знакомая вещь" />
+          </div>
+          <p class="memory-ask" id="ussr-question">Что это?</p>
+          <p class="game-feedback" id="ussr-feedback" aria-live="polite"></p>
+          <div class="ussr-choices" id="ussr-choices"></div>
+          <div class="success" id="ussr-story" hidden>
+            <p class="ussr-story-label">А помните?</p>
+            <p class="success-quote" id="ussr-memory"></p>
+            <p class="ussr-story-label">Для чего использовали:</p>
+            <p class="success-quote" id="ussr-use"></p>
+            <button class="next-btn" type="button" id="ussr-next">
+              Следующая вещь →
+            </button>
+          </div>
+        </div>
+
+        <div id="ussr-result" hidden>
+          <h1>Вот сколько всего вспомнилось!</h1>
+          <p class="success-quote" id="ussr-result-text"></p>
+          <div class="ussr-result-actions">
+            <button class="next-btn" type="button" id="ussr-again">Вспомнить ещё</button>
+            <button class="hint-btn" type="button" id="ussr-home">Назад</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-my-important" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="life-back">← На главную</button>
+      </header>
+      <main class="game memories-hub">
+        <h1>Моё важное</h1>
+        <p class="game-instruction">Всё нужное — в одном месте</p>
+        <section class="cards memories-cards life-cards" aria-label="Моё важное">
+          <button class="card card-play card-featured card-recipes" type="button" id="open-recipes">
+            <span class="card-photo">
+              <img
+                src="assets/images/recipes.png"
+                alt="Домашняя книга рецептов на кухонном столе"
+              />
+            </span>
+            <h2>Моя книга рецептов</h2>
+            <p>Любимые домашние блюда и семейные рецепты</p>
+            <span class="card-action">Открыть →</span>
+          </button>
+          <button class="card card-play card-featured card-notes" type="button" id="open-important">
+            <span class="card-photo">
+              <img
+                src="assets/images/notes_reminders.jpg"
+                alt="Блокнот, карандаш и напоминания на столе"
+              />
+            </span>
+            <h2>Заметки и напоминания</h2>
+            <p>Планы, дела и то, что важно не забыть</p>
+            <span class="card-action">Открыть →</span>
+          </button>
+          <button class="card card-play card-featured card-contacts" type="button" id="open-phones">
+            <span class="card-photo">
+              <img
+                src="assets/images/important_contacts.jpg"
+                alt="Записная книжка с телефонами"
+              />
+            </span>
+            <h2>Важные телефоны</h2>
+            <p>Нужные контакты всегда под рукой</p>
+            <span class="card-action">Открыть →</span>
+          </button>
+          <button class="card card-play card-featured card-measure-entry" type="button" id="open-measures">
+            <span class="card-photo">
+              <img
+                src="assets/images/my_measurements.jpg"
+                alt="Блокнот с записями измерений"
+              />
+            </span>
+            <h2>Мои измерения</h2>
+            <p>Давление, вес, сахар и динамика</p>
+            <span class="card-action">Открыть →</span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <div class="page game-page" id="screen-important" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="important-back">← К Моему важному</button>
+      </header>
+      <main class="game important-book">
+        <div id="imp-hub">
+          <h1>Заметки и напоминания</h1>
+          <p class="game-instruction">Планы, дела и то, что важно не забыть</p>
+          <section class="imp-today" id="imp-today" aria-label="Сегодня"></section>
+          <section class="cards memories-cards important-cards" aria-label="Заметки и напоминания">
+            <button class="card card-play" type="button" id="open-notes">
+              <h2>📝 Мои заметки</h2>
+              <p>Короткие записи, чтобы ничего не забыть</p>
+              <span class="card-action">Открыть</span>
+            </button>
+            <button class="card card-play" type="button" id="open-reminders">
+              <h2>⏰ Напоминания</h2>
+              <p>Дела на день и на ближайшее время</p>
+              <span class="card-action">Открыть</span>
+            </button>
+          </section>
+        </div>
+
+        <div id="imp-notes" hidden>
+          <h1>Мои заметки</h1>
+          <form class="imp-form" id="note-form">
+            <label class="imp-field">
+              <span>Короткий заголовок</span>
+              <div class="imp-voice-row">
+                <input id="note-title" name="title" type="text" maxlength="80" required />
+                <button class="voice-btn" type="button" data-dictation="note-title">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <label class="imp-field">
+              <span>Текст заметки</span>
+              <div class="imp-voice-row imp-voice-row-stack">
+                <textarea id="note-text" name="text" rows="4" maxlength="2000" required></textarea>
+                <button class="voice-btn" type="button" data-dictation="note-text">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <button class="next-btn" type="submit" id="note-save">Сохранить</button>
+          </form>
+          <div class="imp-empty" id="notes-empty">
+            <p class="success-title">Пока записей нет</p>
+            <p class="game-instruction">Добавьте первую заметку</p>
+          </div>
+          <div class="imp-list" id="notes-list"></div>
+        </div>
+
+        <div id="imp-reminders" hidden>
+          <h1>Напоминания</h1>
+          <form class="imp-form" id="reminder-form">
+            <label class="imp-field">
+              <span>Что нужно напомнить</span>
+              <div class="imp-voice-row">
+                <input id="reminder-text" name="text" type="text" maxlength="160" required />
+                <button class="voice-btn" type="button" data-dictation="reminder-text">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <div class="imp-row">
+              <label class="imp-field">
+                <span>Дата</span>
+                <input id="reminder-date" name="date" type="date" required />
+              </label>
+              <label class="imp-field">
+                <span>Время</span>
+                <input id="reminder-time" name="time" type="time" required />
+              </label>
+            </div>
+            <button class="next-btn" type="submit" id="reminder-save">Сохранить напоминание</button>
+          </form>
+          <h2 class="imp-list-title">Ближайшие</h2>
+          <div class="imp-empty" id="reminders-empty">
+            <p class="success-title">Пока записей нет</p>
+            <p class="game-instruction">Добавьте первое напоминание</p>
+          </div>
+          <div class="imp-list" id="reminders-list"></div>
+          <h2 class="imp-list-title">Выполненные</h2>
+          <div class="imp-empty" id="reminders-done-empty">
+            <p class="game-instruction">Выполненных напоминаний пока нет</p>
+          </div>
+          <div class="imp-list" id="reminders-done-list"></div>
+        </div>
+
+        <div id="imp-phones" hidden>
+          <h1>Важные телефоны</h1>
+          <form class="imp-form" id="phone-form">
+            <label class="imp-field">
+              <span>Имя</span>
+              <div class="imp-voice-row">
+                <input id="phone-name" name="name" type="text" maxlength="80" required />
+                <button class="voice-btn" type="button" data-dictation="phone-name">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <label class="imp-field">
+              <span>Кто это / описание</span>
+              <div class="imp-voice-row">
+                <input id="phone-desc" name="description" type="text" maxlength="120" />
+                <button class="voice-btn" type="button" data-dictation="phone-desc">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <label class="imp-field">
+              <span>Номер телефона</span>
+              <input id="phone-number" name="phone" type="tel" maxlength="32" required />
+            </label>
+            <button class="next-btn" type="submit" id="phone-save">Сохранить</button>
+          </form>
+          <div class="imp-empty" id="phones-empty">
+            <p class="success-title">Пока записей нет</p>
+            <p class="game-instruction">Добавьте первый номер</p>
+          </div>
+          <div class="imp-list" id="phones-list"></div>
+        </div>
+
+        <div id="imp-measures" hidden>
+          <div class="dash-heading">
+            <h1>Мои измерения</h1>
+            <button class="hint-btn dash-norms-btn" type="button" id="open-measure-goals">Настроить мои нормы</button>
+          </div>
+          <p class="game-instruction">Всё важное — перед глазами</p>
+          <section class="dash-measure-grid" id="dash-measure-cards" aria-label="Последние измерения"></section>
+          <section class="dash-panel" id="dash-next-reminder" aria-label="Ближайшее напоминание"></section>
+          <section class="dash-panel">
+            <h2 class="dash-title">Динамика</h2>
+            <div class="imp-chip-row" id="chart-kind-row">
+              <button class="imp-chip is-on" type="button" data-chart-kind="bp">Давление</button>
+              <button class="imp-chip" type="button" data-chart-kind="weight">Вес</button>
+              <button class="imp-chip" type="button" data-chart-kind="glucose">Сахар</button>
+            </div>
+            <div class="imp-chip-row" id="chart-range-row">
+              <button class="imp-chip is-on" type="button" data-chart-range="7">7 дней</button>
+              <button class="imp-chip" type="button" data-chart-range="30">30 дней</button>
+              <button class="imp-chip" type="button" data-chart-range="90">3 месяца</button>
+              <button class="imp-chip" type="button" data-chart-range="all">Всё</button>
+            </div>
+            <div class="imp-chip-row" id="chart-glucose-filter-row" hidden>
+              <button class="imp-chip is-on" type="button" data-chart-glucose="all">Все</button>
+              <button class="imp-chip" type="button" data-chart-glucose="fasting">Натощак</button>
+              <button class="imp-chip" type="button" data-chart-glucose="before_meal">До еды</button>
+              <button class="imp-chip" type="button" data-chart-glucose="after_meal">После еды</button>
+              <button class="imp-chip" type="button" data-chart-glucose="before_sleep">Перед сном</button>
+            </div>
+            <label class="dash-pulse-toggle" id="chart-pulse-wrap" hidden>
+              <input type="checkbox" id="chart-pulse" />
+              Показать пульс
+            </label>
+            <div class="dash-chart-wrap">
+              <p class="chart-legend" id="chart-legend" hidden></p>
+              <svg class="dash-chart" id="measure-chart" viewBox="0 0 640 260" preserveAspectRatio="xMidYMin meet" role="img" aria-label="Диаграмма измерений"></svg>
+              <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+              <p class="imp-empty dash-chart-empty" id="chart-empty">Пока нет измерений за этот период.</p>
+            </div>
+          </section>
+          <section class="dash-panel">
+            <h2 class="dash-title">Последние записи</h2>
+            <div id="dash-recent"></div>
+            <button class="hint-btn dash-wide-btn" type="button" id="open-measure-history">Вся история</button>
+          </section>
+        </div>
+
+        <div id="imp-measure-goals" hidden>
+          <h1>Мои нормы</h1>
+          <p class="game-instruction">Задайте свои целевые диапазоны — так удобнее сравнивать измерения.</p>
+          <form class="imp-form" id="measure-goals-form">
+            <section class="goals-block">
+              <h2 class="dash-title">Давление</h2>
+              <div class="imp-row">
+                <label class="imp-field">
+                  <span>Верхнее: от</span>
+                  <input id="goal-sys-min" name="sysMin" type="number" inputmode="numeric" min="50" max="300" />
+                </label>
+                <label class="imp-field">
+                  <span>Верхнее: до</span>
+                  <input id="goal-sys-max" name="sysMax" type="number" inputmode="numeric" min="50" max="300" />
+                </label>
+              </div>
+              <div class="imp-row">
+                <label class="imp-field">
+                  <span>Нижнее: от</span>
+                  <input id="goal-dia-min" name="diaMin" type="number" inputmode="numeric" min="30" max="200" />
+                </label>
+                <label class="imp-field">
+                  <span>Нижнее: до</span>
+                  <input id="goal-dia-max" name="diaMax" type="number" inputmode="numeric" min="30" max="200" />
+                </label>
+              </div>
+              <div class="imp-row">
+                <label class="imp-field">
+                  <span>Пульс: от (необязательно)</span>
+                  <input id="goal-pulse-min" name="pulseMin" type="number" inputmode="numeric" min="30" max="220" />
+                </label>
+                <label class="imp-field">
+                  <span>Пульс: до</span>
+                  <input id="goal-pulse-max" name="pulseMax" type="number" inputmode="numeric" min="30" max="220" />
+                </label>
+              </div>
+            </section>
+            <section class="goals-block">
+              <h2 class="dash-title">Мой целевой диапазон веса</h2>
+              <div class="imp-row">
+                <label class="imp-field">
+                  <span>от, кг</span>
+                  <input id="goal-weight-min" name="weightMin" type="number" inputmode="decimal" min="20" max="300" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до, кг</span>
+                  <input id="goal-weight-max" name="weightMax" type="number" inputmode="decimal" min="20" max="300" step="0.1" />
+                </label>
+              </div>
+              <label class="imp-field">
+                <span>Моя цель, кг (необязательно)</span>
+                <input id="goal-weight-target" name="weightTarget" type="number" inputmode="decimal" min="20" max="300" step="0.1" />
+              </label>
+            </section>
+            <section class="goals-block">
+              <h2 class="dash-title">Сахар, ммоль/л</h2>
+              <p class="imp-hint">Для каждого момента измерения — свой диапазон.</p>
+              <div class="goals-glu-row">
+                <p class="goals-glu-label">Натощак</p>
+                <label class="imp-field">
+                  <span>от</span>
+                  <input id="goal-glu-fasting-min" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до</span>
+                  <input id="goal-glu-fasting-max" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+              </div>
+              <div class="goals-glu-row">
+                <p class="goals-glu-label">До еды</p>
+                <label class="imp-field">
+                  <span>от</span>
+                  <input id="goal-glu-before_meal-min" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до</span>
+                  <input id="goal-glu-before_meal-max" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+              </div>
+              <div class="goals-glu-row">
+                <p class="goals-glu-label">Через 1–2 часа после еды</p>
+                <label class="imp-field">
+                  <span>от</span>
+                  <input id="goal-glu-after_meal-min" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до</span>
+                  <input id="goal-glu-after_meal-max" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+              </div>
+              <div class="goals-glu-row">
+                <p class="goals-glu-label">Перед сном</p>
+                <label class="imp-field">
+                  <span>от</span>
+                  <input id="goal-glu-before_sleep-min" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до</span>
+                  <input id="goal-glu-before_sleep-max" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+              </div>
+              <div class="goals-glu-row">
+                <p class="goals-glu-label">Другое</p>
+                <label class="imp-field">
+                  <span>от</span>
+                  <input id="goal-glu-other-min" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+                <label class="imp-field">
+                  <span>до</span>
+                  <input id="goal-glu-other-max" type="number" inputmode="decimal" min="1" max="40" step="0.1" />
+                </label>
+              </div>
+            </section>
+            <p class="goals-note">Целевые значения индивидуальны. При необходимости укажите диапазоны, рекомендованные вашим врачом.</p>
+            <p class="imp-voice-status" id="goals-error" aria-live="polite"></p>
+            <button class="next-btn" type="submit" id="goals-save">Сохранить</button>
+          </form>
+        </div>
+
+        <div id="imp-measure-history" hidden>
+          <h1>История измерений</h1>
+          <div class="imp-chip-row" id="history-kind-row">
+            <button class="imp-chip is-on" type="button" data-history-kind="all">Все</button>
+            <button class="imp-chip" type="button" data-history-kind="bp">Давление</button>
+            <button class="imp-chip" type="button" data-history-kind="weight">Вес</button>
+            <button class="imp-chip" type="button" data-history-kind="glucose">Сахар</button>
+          </div>
+          <div class="imp-chip-row" id="history-range-row">
+            <button class="imp-chip is-on" type="button" data-history-range="7">7 дней</button>
+            <button class="imp-chip" type="button" data-history-range="30">30 дней</button>
+            <button class="imp-chip" type="button" data-history-range="90">3 месяца</button>
+            <button class="imp-chip" type="button" data-history-range="all">Всё время</button>
+          </div>
+          <div class="imp-chip-row" id="history-glucose-filter-row" hidden>
+            <button class="imp-chip is-on" type="button" data-history-glucose="all">Все</button>
+            <button class="imp-chip" type="button" data-history-glucose="fasting">Натощак</button>
+            <button class="imp-chip" type="button" data-history-glucose="before_meal">До еды</button>
+            <button class="imp-chip" type="button" data-history-glucose="after_meal">После еды</button>
+            <button class="imp-chip" type="button" data-history-glucose="before_sleep">Перед сном</button>
+          </div>
+          <div class="imp-empty" id="history-empty">
+            <p class="success-title">Пока записей нет</p>
+            <p class="game-instruction">Добавьте первое измерение</p>
+          </div>
+          <div class="imp-list" id="history-list"></div>
+          <button class="next-btn dash-wide-btn" type="button" id="open-history-print">Показать историю</button>
+        </div>
+
+        <div id="imp-history-print" hidden>
+          <h1>История измерений</h1>
+          <p class="game-instruction" id="history-print-caption"></p>
+          <div class="imp-print-table-wrap" id="history-print-table"></div>
+        </div>
+
+        <div id="imp-measure-remind" hidden>
+          <h1 id="measure-remind-title">Напоминание</h1>
+          <form class="imp-form" id="measure-remind-form">
+            <label class="imp-field">
+              <span>Что напомнить</span>
+              <input id="measure-remind-text" name="text" type="text" maxlength="160" required />
+            </label>
+            <label class="imp-field">
+              <span>Как часто</span>
+              <select id="measure-remind-repeat" name="repeat">
+                <option value="once">один раз</option>
+                <option value="daily">ежедневно</option>
+                <option value="weekdays">по выбранным дням</option>
+                <option value="weekly">еженедельно</option>
+              </select>
+            </label>
+            <div class="imp-row" id="measure-remind-once">
+              <label class="imp-field">
+                <span>Дата</span>
+                <input id="measure-remind-date" name="date" type="date" />
+              </label>
+              <label class="imp-field">
+                <span>Время</span>
+                <input id="measure-remind-time" name="time" type="time" />
+              </label>
+            </div>
+            <label class="imp-field" id="measure-remind-time-only" hidden>
+              <span>Время</span>
+              <input id="measure-remind-time2" name="time2" type="time" />
+            </label>
+            <label class="imp-field" id="measure-remind-time-extra" hidden>
+              <span>Ещё время (необязательно)</span>
+              <input id="measure-remind-time3" name="time3" type="time" />
+            </label>
+            <fieldset class="imp-field" id="measure-remind-days" hidden>
+              <legend>Дни недели</legend>
+              <div class="imp-weekdays">
+                <label><input type="checkbox" value="1" /> пн</label>
+                <label><input type="checkbox" value="2" /> вт</label>
+                <label><input type="checkbox" value="3" /> ср</label>
+                <label><input type="checkbox" value="4" /> чт</label>
+                <label><input type="checkbox" value="5" /> пт</label>
+                <label><input type="checkbox" value="6" /> сб</label>
+                <label><input type="checkbox" value="0" /> вс</label>
+              </div>
+            </fieldset>
+            <button class="next-btn" type="submit">Сохранить напоминание</button>
+          </form>
+        </div>
+
+        <div id="imp-bp" hidden>
+          <h1>Давление</h1>
+          <form class="imp-form" id="bp-form">
+            <button class="voice-btn imp-voice-fill" type="button" data-measure-voice="bp">🎙️ Заполнить голосом</button>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <div class="imp-row">
+              <label class="imp-field">
+                <span>Верхнее давление</span>
+                <input id="bp-systolic" name="systolic" type="number" inputmode="numeric" min="50" max="300" required />
+              </label>
+              <label class="imp-field">
+                <span>Нижнее давление</span>
+                <input id="bp-diastolic" name="diastolic" type="number" inputmode="numeric" min="30" max="200" required />
+              </label>
+              <label class="imp-field">
+                <span>Пульс</span>
+                <input id="bp-pulse" name="pulse" type="number" inputmode="numeric" min="30" max="220" required />
+              </label>
+            </div>
+            <div class="imp-row">
+              <label class="imp-field">
+                <span>Дата</span>
+                <input id="bp-date" name="date" type="date" required />
+              </label>
+              <label class="imp-field">
+                <span>Время</span>
+                <input id="bp-time" name="time" type="time" required />
+              </label>
+            </div>
+            <label class="imp-field">
+              <span>Заметка (необязательно)</span>
+              <div class="imp-voice-row">
+                <input id="bp-note" name="note" type="text" maxlength="160" />
+                <button class="voice-btn" type="button" data-dictation="bp-note">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <button class="next-btn" type="submit" id="bp-save">Сохранить</button>
+          </form>
+        </div>
+
+        <div id="imp-weight" hidden>
+          <h1>Вес</h1>
+          <form class="imp-form" id="weight-form">
+            <button class="voice-btn imp-voice-fill" type="button" data-measure-voice="weight">🎙️ Заполнить голосом</button>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <label class="imp-field">
+              <span>Вес в кг</span>
+              <input id="weight-kg" name="weight" type="number" inputmode="decimal" min="20" max="300" step="0.1" required />
+            </label>
+            <div class="imp-row">
+              <label class="imp-field">
+                <span>Дата</span>
+                <input id="weight-date" name="date" type="date" required />
+              </label>
+              <label class="imp-field">
+                <span>Время</span>
+                <input id="weight-time" name="time" type="time" required />
+              </label>
+            </div>
+            <label class="imp-field">
+              <span>Заметка (необязательно)</span>
+              <div class="imp-voice-row">
+                <input id="weight-note" name="note" type="text" maxlength="160" />
+                <button class="voice-btn" type="button" data-dictation="weight-note">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <button class="next-btn" type="submit" id="weight-save">Сохранить</button>
+          </form>
+        </div>
+
+        <div id="imp-glucose" hidden>
+          <h1>Сахар</h1>
+          <form class="imp-form" id="glucose-form">
+            <button class="voice-btn imp-voice-fill" type="button" data-measure-voice="glucose">🎙️ Заполнить голосом</button>
+            <p class="imp-voice-status" aria-live="polite"></p>
+            <label class="imp-field">
+              <span>Значение</span>
+              <input id="glucose-value" name="glucose" type="number" inputmode="decimal" min="1" max="40" step="0.1" required />
+            </label>
+            <p class="imp-hint">Единица: ммоль/л</p>
+            <label class="imp-field">
+              <span>Когда измерено?</span>
+              <select id="glucose-condition" name="condition" required>
+                <option value="">Выберите момент измерения</option>
+                <option value="fasting">Натощак</option>
+                <option value="before_meal">До еды</option>
+                <option value="after_meal">Через 1–2 часа после еды</option>
+                <option value="before_sleep">Перед сном</option>
+                <option value="other">Другое</option>
+              </select>
+            </label>
+            <div class="imp-row">
+              <label class="imp-field">
+                <span>Дата</span>
+                <input id="glucose-date" name="date" type="date" required />
+              </label>
+              <label class="imp-field">
+                <span>Время</span>
+                <input id="glucose-time" name="time" type="time" required />
+              </label>
+            </div>
+            <label class="imp-field">
+              <span>Заметка (необязательно)</span>
+              <div class="imp-voice-row">
+                <input id="glucose-note" name="note" type="text" maxlength="160" />
+                <button class="voice-btn" type="button" data-dictation="glucose-note">🎙️ Надиктовать</button>
+              </div>
+            </label>
+            <button class="next-btn" type="submit" id="glucose-save">Сохранить</button>
+          </form>
+        </div>
+      </main>
+
+      <div class="recipe-dialog" id="imp-dialog" hidden>
+        <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="imp-dialog-title">
+          <p class="success-title" id="imp-dialog-title">Удалить эту запись?</p>
+          <p class="game-instruction">Её можно будет добавить заново, если передумаете.</p>
+          <div class="recipe-form-actions">
+            <button class="hint-btn" type="button" id="imp-dialog-cancel">Отмена</button>
+            <button class="next-btn" type="button" id="imp-dialog-ok">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page game-page" id="screen-recipes" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="recipes-back">
+          ← К Моему важному
+        </button>
+      </header>
+
+      <main class="game recipe-book">
+        <div id="recipe-list-view">
+          <h1>Моя книга рецептов</h1>
+          <p class="game-instruction">Любимые блюда, которые хочется сохранить</p>
+
+          <div class="recipe-mode-tabs" role="tablist" aria-label="Раздел книги рецептов">
+            <button
+              class="recipe-mode-btn is-on"
+              type="button"
+              id="recipe-mode-mine"
+              role="tab"
+              aria-selected="true"
+            >
+              ❤️ Мои рецепты
+            </button>
+            <button
+              class="recipe-mode-btn"
+              type="button"
+              id="recipe-mode-library"
+              role="tab"
+              aria-selected="false"
+            >
+              📖 Книга рецептов
+            </button>
+          </div>
+
+          <p class="recipe-voice-note" id="recipe-library-note" hidden></p>
+
+          <div class="recipe-toolbar">
+            <button class="next-btn" type="button" id="recipe-add">+ Добавить рецепт</button>
+            <label class="recipe-search-wrap">
+              <span class="visually-hidden">Найти рецепт</span>
+              <input
+                class="recipe-search"
+                id="recipe-search"
+                type="search"
+                placeholder="Найти рецепт…"
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div class="recipe-filters" id="recipe-filters" role="group" aria-label="Категории"></div>
+          <label class="recipe-filter-select-wrap">
+            <span class="visually-hidden">Категория</span>
+            <select class="recipe-filter-select" id="recipe-filter-select"></select>
+          </label>
+
+          <div class="recipe-empty" id="recipe-empty" hidden>
+            <p class="success-title">Здесь пока нет рецептов</p>
+            <p class="game-instruction">Добавьте первый любимый рецепт 🌿</p>
+            <button class="next-btn" type="button" id="recipe-empty-add">+ Добавить рецепт</button>
+          </div>
+          <p class="game-feedback recipe-saved" id="recipe-saved" hidden aria-live="polite">Рецепт сохранён 🌷</p>
+          <p class="game-feedback" id="recipe-none" hidden>Ничего не найдено 🌿</p>
+          <div class="recipe-list" id="recipe-list"></div>
+        </div>
+
+        <div id="recipe-detail-view" hidden>
+          <button class="back-btn" type="button" id="recipe-detail-back">← К книге</button>
+          <article class="recipe-detail-card">
+            <h1 id="recipe-detail-title"></h1>
+            <p class="recipe-meta" id="recipe-detail-meta"></p>
+            <h2 class="recipe-subhead">Ингредиенты</h2>
+            <ul class="recipe-ing-list" id="recipe-detail-ings"></ul>
+            <h2 class="recipe-subhead">Как приготовить</h2>
+            <p class="recipe-instructions" id="recipe-detail-text"></p>
+            <div class="recipe-card-actions">
+              <button class="hint-btn" type="button" id="recipe-detail-edit">Изменить</button>
+            </div>
+          </article>
+        </div>
+
+        <div id="recipe-lib-detail-view" hidden>
+          <button class="back-btn" type="button" id="recipe-lib-detail-back">← К книге</button>
+          <article class="recipe-detail-card">
+            <h1 id="recipe-lib-detail-title"></h1>
+            <p class="recipe-meta" id="recipe-lib-detail-desc"></p>
+            <p class="recipe-category" id="recipe-lib-detail-category"></p>
+            <p class="recipe-meta" id="recipe-lib-detail-time"></p>
+            <p class="recipe-meta" id="recipe-lib-detail-servings"></p>
+            <h2 class="recipe-subhead">Ингредиенты</h2>
+            <ul class="recipe-ing-list" id="recipe-lib-detail-ings"></ul>
+            <h2 class="recipe-subhead">Пошаговое приготовление</h2>
+            <ol class="recipe-steps" id="recipe-lib-detail-steps"></ol>
+            <div class="recipe-card-actions">
+              <button class="next-btn" type="button" id="recipe-lib-save">♡ Сохранить себе</button>
+            </div>
+          </article>
+        </div>
+
+        <div id="recipe-form-view" hidden>
+          <h1 id="recipe-form-title">Новый рецепт</h1>
+          <p class="voice-status" id="recipe-voice-status" aria-live="polite"></p>
+          <p class="recipe-voice-note" id="recipe-voice-note" hidden>
+            Голосовой ввод недоступен в этом браузере. Можно ввести текст вручную.
+          </p>
+
+          <form class="recipe-form" id="recipe-form">
+            <div class="recipe-field">
+              <label for="recipe-title">Название блюда</label>
+              <div class="recipe-field-row recipe-field-row-stack">
+                <input id="recipe-title" name="title" type="text" required maxlength="120" />
+                <button class="voice-btn" type="button" data-voice="recipe-title">🎙 Назвать блюдо</button>
+              </div>
+            </div>
+
+            <div class="recipe-field">
+              <label for="recipe-author">Автор рецепта</label>
+              <input id="recipe-author" name="author" type="text" placeholder="Бабушка Валя или Мой рецепт" maxlength="80" />
+            </div>
+
+            <div class="recipe-field">
+              <label for="recipe-category">Категория</label>
+              <select id="recipe-category" name="category"></select>
+            </div>
+
+            <fieldset class="recipe-field">
+              <legend>Ингредиенты</legend>
+              <div class="ing-grid" id="ing-grid"></div>
+              <div class="recipe-field-row recipe-custom-ing">
+                <input id="recipe-custom-ing" type="text" placeholder="Свой продукт" maxlength="40" />
+                <button class="voice-btn" type="button" data-voice="recipe-custom-ing">🎙 Назвать продукт</button>
+                <button class="hint-btn" type="button" id="recipe-custom-add">+ Добавить свой продукт</button>
+              </div>
+              <div class="ing-selected" id="ing-selected"></div>
+            </fieldset>
+
+            <div class="recipe-field">
+              <label for="recipe-instructions">Как приготовить</label>
+              <div class="recipe-field-row recipe-field-row-stack">
+                <textarea id="recipe-instructions" name="instructions" rows="8" maxlength="4000"></textarea>
+                <button class="voice-btn" type="button" data-voice="recipe-instructions">🎙 Рассказать рецепт</button>
+              </div>
+            </div>
+
+            <div class="recipe-form-actions">
+              <button class="hint-btn" type="button" id="recipe-form-cancel">Отмена</button>
+              <button class="next-btn" type="submit">Сохранить рецепт</button>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <div class="recipe-dialog" id="recipe-dialog" hidden>
+        <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="recipe-dialog-title">
+          <p class="success-title" id="recipe-dialog-title">Удалить этот рецепт?</p>
+          <p class="game-instruction">Его можно будет записать заново, если передумаете.</p>
+          <div class="recipe-form-actions">
+            <button class="hint-btn" type="button" id="recipe-dialog-cancel">Отмена</button>
+            <button class="next-btn" type="button" id="recipe-dialog-ok">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page game-page room-page" id="screen-room" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="room-back">← На главную</button>
+        <button class="hint-btn" type="button" id="room-rewards-open">Мои награды</button>
+      </header>
+      <main class="room-main">
+        <h1>Моя комната</h1>
+        <p class="game-instruction">Здесь становится уютнее вместе с вашими воспоминаниями.</p>
+        <div class="room-frame">
+          <div class="room-scene" id="room-scene" role="img" aria-label="Комната с предметами, которые появляются за ваши занятия"></div>
+        </div>
+        <p class="room-hint" id="room-more-hint">Здесь ещё появится что-то хорошее…</p>
+      </main>
+    </div>
+
+    <div class="page game-page tips-page" id="screen-tips" hidden>
+      <header class="game-top">
+        <button class="back-btn" type="button" id="tips-back">← Назад</button>
+      </header>
+      <main class="tips-main">
+        <div id="tips-intro">
+          <h1>Полезные хитрости</h1>
+          <p class="game-instruction">То, что хочется запомнить и сохранить</p>
+          <section class="tips-day" id="tips-day" aria-label="Совет дня"></section>
+        </div>
+
+        <form class="tips-search" id="tips-search-form" role="search">
+          <label class="tips-search-label" for="tips-search-input">Поиск</label>
+          <div class="tips-search-row">
+            <input id="tips-search-input" type="search" maxlength="80" placeholder="Например: пятно, лук, мошенники" autocomplete="off" />
+            <button class="next-btn" type="submit" id="tips-search-btn">Найти</button>
+          </div>
+        </form>
+
+        <div id="tips-browse">
+          <section class="tips-cats" aria-label="Категории">
+            <h2 class="tips-section-title">Категории</h2>
+            <div class="tips-cat-grid" id="tips-cat-grid"></div>
+          </section>
+
+          <section class="tips-recommended" aria-label="Рекомендуемые советы">
+            <h2 class="tips-section-title">Стоит запомнить</h2>
+            <div class="tips-card-list" id="tips-recommended-list"></div>
+          </section>
+
+          <button class="next-btn tips-notebook-btn" type="button" id="tips-open-notebook">Моя тетрадка</button>
+        </div>
+
+        <div id="tips-list" hidden>
+          <h1 id="tips-list-title">Советы</h1>
+          <p class="game-instruction" id="tips-list-note"></p>
+          <div class="tips-card-list" id="tips-list-cards"></div>
+          <p class="tips-empty" id="tips-list-empty" hidden>Ничего не нашли. Попробуйте написать короче или выбрать категорию.</p>
+          <button class="hint-btn" type="button" id="tips-show-more">Показать ещё</button>
+        </div>
+
+        <div id="tips-detail" hidden>
+          <p class="tips-kicker" id="tips-detail-cat"></p>
+          <h1 id="tips-detail-title"></h1>
+          <p class="tips-detail-text" id="tips-detail-text"></p>
+          <p class="tips-warning" id="tips-detail-warning" hidden></p>
+          <p class="tips-note-preview" id="tips-detail-note" hidden></p>
+          <div class="tips-detail-actions">
+            <button class="next-btn" type="button" id="tips-detail-save">♡ Сохранить</button>
+            <button class="hint-btn" type="button" id="tips-detail-note-btn">✎ Моя заметка</button>
+          </div>
+        </div>
+
+        <div id="tips-notebook" hidden>
+          <h1>Моя тетрадка</h1>
+          <p class="game-instruction">Сохранённые советы и ваши собственные записи</p>
+          <button class="next-btn tips-notebook-btn" type="button" id="tips-write-own">+ Записать свою хитрость</button>
+          <div class="tips-empty-block" id="tips-notebook-empty" hidden>
+            <p class="success-title">В тетрадке пока ничего нет. Сохраняйте полезные советы — они появятся здесь.</p>
+          </div>
+          <div id="tips-notebook-saved"></div>
+          <div id="tips-notebook-own"></div>
+        </div>
+
+        <div id="tips-user-form" hidden>
+          <h1 id="tips-user-form-title">Своя хитрость</h1>
+          <form class="imp-form" id="tips-own-form">
+            <label class="imp-field">
+              <span>Название</span>
+              <input id="tips-own-title" name="title" type="text" maxlength="80" required />
+            </label>
+            <label class="imp-field">
+              <span>Категория</span>
+              <select id="tips-own-category" name="category" required></select>
+            </label>
+            <label class="imp-field">
+              <span>Текст</span>
+              <textarea id="tips-own-text" name="text" rows="5" maxlength="2000" required></textarea>
+            </label>
+            <button class="next-btn" type="submit" id="tips-own-save">Сохранить</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <div class="recipe-dialog" id="tips-note-dialog" hidden>
+      <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="tips-note-dialog-title">
+        <p class="success-title" id="tips-note-dialog-title">Моя заметка</p>
+        <p class="game-instruction">Коротко, своими словами. Текст совета не изменится.</p>
+        <label class="imp-field tips-dialog-field">
+          <span>Заметка</span>
+          <textarea id="tips-note-input" rows="4" maxlength="400" placeholder="Например: Так делала мама"></textarea>
+        </label>
+        <div class="recipe-form-actions">
+          <button class="next-btn" type="button" id="tips-note-save">Сохранить</button>
+          <button class="hint-btn" type="button" id="tips-note-delete" hidden>Удалить заметку</button>
+          <button class="hint-btn" type="button" id="tips-note-cancel">Отмена</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-dialog" id="tips-delete-dialog" hidden>
+      <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="tips-delete-title">
+        <p class="success-title" id="tips-delete-title">Удалить эту запись?</p>
+        <p class="game-instruction">Её нельзя будет вернуть.</p>
+        <div class="recipe-form-actions">
+          <button class="hint-btn" type="button" id="tips-delete-cancel">Отмена</button>
+          <button class="next-btn" type="button" id="tips-delete-ok">Удалить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-toast" id="tips-toast" hidden role="status" aria-live="polite"></div>
+
+    <div class="recipe-dialog room-dialog" id="room-intro-dialog" hidden>
+      <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="room-intro-title">
+        <p class="success-title" id="room-intro-title">Это ваша комната.</p>
+        <p class="game-instruction">Пока здесь немного вещей. Со временем здесь появится то, что связано с вашими воспоминаниями, играми, заботой о себе и маленькими радостями.</p>
+        <div class="recipe-form-actions">
+          <button class="next-btn" type="button" id="room-intro-ok">Хорошо</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-dialog room-dialog" id="room-notify-dialog" hidden>
+      <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="room-notify-title">
+        <p class="success-title" id="room-notify-title">В вашей комнате появилось кое-что новое…</p>
+        <p class="room-notify-name" id="room-notify-name"></p>
+        <p class="game-instruction" id="room-notify-text"></p>
+        <div class="recipe-form-actions">
+          <button class="next-btn" type="button" id="room-notify-look">Заглянуть в комнату</button>
+          <button class="hint-btn" type="button" id="room-notify-continue">Продолжить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-dialog room-dialog" id="room-rewards-dialog" hidden>
+      <div class="recipe-dialog-card room-rewards-card" role="dialog" aria-modal="true" aria-labelledby="room-rewards-title">
+        <p class="success-title" id="room-rewards-title">Мои награды</p>
+        <p class="game-instruction" id="room-rewards-summary"></p>
+        <div class="room-rewards-list" id="room-rewards-list"></div>
+        <div class="recipe-form-actions">
+          <button class="hint-btn" type="button" id="room-rewards-close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-dialog room-dialog" id="room-item-dialog" hidden>
+      <div class="recipe-dialog-card" role="dialog" aria-modal="true" aria-labelledby="room-item-title">
+        <p class="success-title" id="room-item-title"></p>
+        <p class="game-instruction" id="room-item-text"></p>
+        <p class="dash-card-meta" id="room-item-date"></p>
+        <div class="room-variants" id="room-item-variants"></div>
+        <div class="recipe-form-actions">
+          <button class="hint-btn" type="button" id="room-item-close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="data/proverbs.js"></script>
+    <script src="data/puzzles.js"></script>
+    <script src="data/quotes.js"></script>
+    <script src="data/dates.js"></script>
+    <script src="data/tips.js"></script>
+    <script src="room.js"></script>
+    <script src="tips.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
